@@ -26,6 +26,7 @@
         owner: exadmn
         group: exadmn
       delegate_to: localhost
+      become_user: root
 
     - name: Add public key to authorized_keys
       authorized_key:
