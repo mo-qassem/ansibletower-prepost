@@ -22,15 +22,17 @@
       file:
         path: home/exadmn/.ssh
         state: directory
-        mode: 0755
-      become_user: root
+        mode: "0700"
+        owner: exadmn
+        group: exadmn
+      delegate_to: localhost
 
     - name: Add public key to authorized_keys
       authorized_key:
         user: "exadmn"
         key: "{{ lookup('file', './other/public_key.pub') }}"
         state: present
-      become_user: exadmn
+      become_user: root
 
     - name: Add exadmn user to sudoers file
       lineinfile:
