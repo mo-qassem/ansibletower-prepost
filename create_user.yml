@@ -1,5 +1,6 @@
 ---
 - name: Create "exadmn" user, add the public key, and add it to sudoers
+  hosts: all
   become: yes
   tasks:
     - name: Create exadmn home directory
