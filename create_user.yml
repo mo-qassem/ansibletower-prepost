@@ -18,10 +18,18 @@
         shell: /bin/bash
       become_user: root
 
+    - name: Create .ssh folder
+      file:
+        path: home/exadmn/.ssh
+        state: directory
+        mode: 0755
+      become_user: exadmn
+
     - name: Add public key to authorized_keys
       authorized_key:
         user: "exadmn"
         key: "{{ lookup('file', './other/public_key.pub') }}"
+        state: present
       become_user: exadmn
 
     - name: Add exadmn user to sudoers file
