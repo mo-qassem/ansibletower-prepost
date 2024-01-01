@@ -1,5 +1,5 @@
 ---
-- name: Create exadmn user, add public key, and add to sudoers
+- name: Create "exadmn" user, add the public key, and add it to sudoers
   become: yes
   tasks:
     - name: Create exadmn home directory
