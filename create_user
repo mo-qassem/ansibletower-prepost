@@ -1,0 +1,34 @@
+---
+- name: Create exadmn user, add public key, and add to sudoers
+  become: yes
+  tasks:
+    - name: Create exadmn home directory
+      file:
+        path: "/home/exadmn"
+        state: directory
+        mode: 0755
+      become_user: root
+
+    - name: Create exadmn user
+      user:
+        name: "exadmn"
+        comment: "Ansible-Tower-AdminUser"
+        home: "/home/exadmn"
+        shell: /bin/bash
+      become_user: root
+
+    - name: Add public key to authorized_keys
+      authorized_key:
+        user: "exadmn"
+        key: "{{ lookup('file', './public_key.pub') }}"
+      become_user: exadmn
+
+    - name: Add exadmn user to sudoers file
+      lineinfile:
+        regexp: "^## Allow root to run any commands anywhere"
+        dest: /etc/sudoers
+        line: "exadmn ALL=(ALL) NOPASSWD: ALL"
+        create: yes
+        validate: "visudo -cf %s"
+      become_user: root
+      become_method: sudo
