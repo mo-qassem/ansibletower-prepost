@@ -3,19 +3,6 @@
   hosts: all
   become: yes
   tasks:
-    - name: Create User Survey
-description: Survey to gather information for creating a user
-questions:
-  - name: username
-    prompt: Enter the username for the new user
-    required: true
-
-    - name: ssh_password
-      prompt: Enter the SSH password for the new user
-      secret: true
-      required: true
-
-    
     - name: Create exadmn home directory
       file:
         path: "/home/exadmn"
