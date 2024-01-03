@@ -3,10 +3,9 @@
   hosts: all
   become: yes
   tasks:
-  
-  - name: Identify Linux distribution
-    set_fact:
-      linux_distribution: "{{ ansible_facts['distribution'] | lower }}"
+    - name: Identify Linux distribution
+      set_fact:
+        linux_distribution: "{{ ansible_facts['distribution'] | lower }}"
 
     - name: Create exadmn user
       user:
@@ -17,7 +16,7 @@
 
     - name: Create exadmn home directory
       file:
-        path: "/home/exadmn"
+        path: "/home/exadmn
         state: directory
         mode: 0755
         owner: exadmn
@@ -37,7 +36,7 @@
         key: "{{ lookup('file', './other/public_key.pub') }}"
         state: present
 
-    - name: Add exadmn user to sudoers file
+    - name: Add exadmn user to sudoers file for rhel based distro
       lineinfile:
         regexp: "^## Allow root to run any commands anywhere"
         dest: /etc/sudoers
@@ -48,7 +47,7 @@
       become_method: sudo
       when: linux_distribution in ['rocky', 'almalinux', 'cloudlinux', 'centos']
 
-    - name: Add exadmn user to sudoers file
+    - name: Add exadmn user to sudoers file for debain based distro
       lineinfile:
         regexp: "^# User privilege specification"
         dest: /etc/sudoers
