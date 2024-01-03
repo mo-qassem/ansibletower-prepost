@@ -16,7 +16,7 @@
 
     - name: Create exadmn home directory
       file:
-        path: "/home/exadmn
+        path: "/home/exadmn"
         state: directory
         mode: "0755"
         owner: exadmn
