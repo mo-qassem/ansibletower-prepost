@@ -3,6 +3,13 @@
   hosts: all
   become: yes
   tasks:
+    - name: Create exadmn user
+      user:
+        name: "exadmn"
+        comment: "Ansible-Tower-AdminUser"
+        home: "/home/exadmn"
+        shell: /bin/bash
+
     - name: Create exadmn home directory
       file:
         path: "/home/exadmn"
@@ -10,13 +17,6 @@
         mode: 0755
         owner: exadmn
         group: exadmn
-
-    - name: Create exadmn user
-      user:
-        name: "exadmn"
-        comment: "Ansible-Tower-AdminUser"
-        home: "/home/exadmn"
-        shell: /bin/bash
 
     - name: Create .ssh folder
       file:
