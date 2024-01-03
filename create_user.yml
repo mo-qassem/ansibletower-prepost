@@ -3,6 +3,11 @@
   hosts: all
   become: yes
   tasks:
+  
+  - name: Identify Linux distribution
+    set_fact:
+      linux_distribution: "{{ ansible_facts['distribution'] | lower }}"
+
     - name: Create exadmn user
       user:
         name: "exadmn"
@@ -41,3 +46,15 @@
         validate: "visudo -cf %s"
       become_user: root
       become_method: sudo
+      when: linux_distribution in ['rocky', 'almalinux', 'cloudlinux', 'centos']
+
+    - name: Add exadmn user to sudoers file
+      lineinfile:
+        regexp: "^# User privilege specification"
+        dest: /etc/sudoers
+        line: "exadmn ALL=(ALL) NOPASSWD: ALL"
+        create: yes
+        validate: "visudo -cf %s"
+      become_user: root
+      become_method: sudo
+      when: linux_distribution == 'ubuntu'
