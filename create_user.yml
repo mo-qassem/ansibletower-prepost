@@ -8,6 +8,8 @@
         path: "/home/exadmn"
         state: directory
         mode: 0755
+        owner: exadmn
+        group: exadmn
 
     - name: Create exadmn user
       user:
