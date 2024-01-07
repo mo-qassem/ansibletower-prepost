@@ -1,7 +1,7 @@
 ---
 - name: Create "exadmn" user, add the public key, and add it to sudoers
   hosts: all
-  become: yes
+  become: true
   gather_facts: true
   vars:
     ansible_port: "{{ survey_ansible_port }}"
