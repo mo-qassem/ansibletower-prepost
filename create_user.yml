@@ -3,11 +3,9 @@
   hosts: all
   become: yes
   gather_facts: true
+  vars:
+    ansible_port: "{{ survey_ansible_port }}"
   tasks:
-    - name: Set ansible_ssh_common_args
-      set_fact:
-        ansible_ssh_common_args: "-o Port={{ survey_ansible_port }}"
-
     - name: Identify Linux distribution
       set_fact:
         linux_distribution: "{{ ansible_facts['distribution'] | lower }}"
