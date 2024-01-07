@@ -24,7 +24,7 @@
 
     - name: Create .ssh folder
       file:
-        path: home/exadmn/.ssh
+        path: /home/exadmn/.ssh
         state: directory
         mode: "0700"
         owner: exadmn
@@ -38,8 +38,8 @@
 
     - name: Add exadmn user to sudoers file for rhel based distro
       lineinfile:
-        regexp: "^## Allow root to run any commands anywhere"
-        dest: /etc/sudoers
+        path: /etc/sudoers
+        insertafter: "^## Allow root to run any commands anywhere"
         line: "exadmn ALL=(ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
@@ -49,8 +49,8 @@
 
     - name: Add exadmn user to sudoers file for debain based distro
       lineinfile:
-        regexp: "^# User privilege specification"
-        dest: /etc/sudoers
+        path: /etc/sudoers
+        insertafter: "^# User privilege specification"
         line: "exadmn ALL=(ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
