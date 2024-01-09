@@ -43,7 +43,7 @@
       lineinfile:
         path: /etc/sudoers
         insertafter: "^## Allow root to run any commands anywhere"
-        line: "exadmn ALL=(ALL) NOPASSWD: ALL"
+        line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
       become_user: root
@@ -54,7 +54,7 @@
       lineinfile:
         path: /etc/sudoers
         insertafter: "^# User privilege specification"
-        line: "exadmn ALL=(ALL) NOPASSWD: ALL"
+        line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
       become_user: root
