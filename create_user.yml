@@ -47,8 +47,6 @@
         line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
-      become_user: root
-      become_method: sudo
       when: linux_distribution in ['rocky', 'almalinux', 'cloudlinux', 'centos']
 
     - name: Add exadmn user to sudoers file for debain based distro
@@ -58,6 +56,4 @@
         line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
-      become_user: root
-      become_method: sudo
       when: linux_distribution == 'ubuntu'
