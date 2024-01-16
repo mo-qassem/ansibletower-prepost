@@ -52,7 +52,7 @@
     - name: Add exadmn user to sudoers file for debain based distro
       lineinfile:
         path: /etc/sudoers
-        insertafter: "^# User privilege specification"
+        insertafter: "^# Allow members of group sudo to execute any command"
         line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
