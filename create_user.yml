@@ -56,7 +56,7 @@
         line: "exadmn ALL=(ALL:ALL) NOPASSWD: ALL"
         create: yes
         validate: "visudo -cf %s"
-      when: linux_distribution == 'ubuntu'
+      when: linux_distribution in ['ubuntu', 'debain']
 
     - name: Update the 'MOTD' file
       copy:
